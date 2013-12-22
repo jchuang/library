@@ -8,6 +8,8 @@ class Book < ActiveRecord::Base
     allow_nil: true
 
   has_many :checkouts, inverse_of: :book, dependent: :destroy
+  has_many :categorizations, inverse_of: :book, dependent: :destroy
+  has_many :categories, through: :categorizations
 
   def self.seed
     filename = Rails.root + 'db/data/books.csv'

@@ -7,6 +7,9 @@ describe Category do
 
   it { should validate_uniqueness_of :name }
 
+  it { should have_many(:categorizations).dependent(:destroy) }
+  it { should have_many(:books).through(:categorizations) }
+
   it 'should add categories to database' do
     expect(Category.count).to eql(0)
     Category.seed

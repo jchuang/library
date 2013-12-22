@@ -8,6 +8,8 @@ describe Book do
   it { should_not have_valid(:rating).when(-1, 33.3, 105, 'awesome')}
 
   it { should have_many(:checkouts).dependent(:destroy) }
+  it { should have_many(:categorizations).dependent(:destroy) }
+  it { should have_many(:categories).through(:categorizations) }
 
   it 'should add books to database using seed file' do
     expect(Book.count).to eql(0)

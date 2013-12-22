@@ -9,4 +9,16 @@ describe Book do
 
   it { should have_many(:checkouts).dependent(:destroy) }
 
+  it 'should add books to database using seed file' do
+    expect(Book.count).to eql(0)
+    Book.seed
+    expect(Book.count).to be > 0
+  end
+
+  it 'should not create duplicate books' do
+    Book.seed
+    book_count = Book.count
+    Book.seed
+    expect(Book.count).to eql(book_count)
+  end
 end
